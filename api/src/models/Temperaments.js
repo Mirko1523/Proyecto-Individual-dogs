@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+// Luego le inyectamos la conexion a sequelize.
 const Temperaments = (sequelize) => {
   // defino el modelo
   sequelize.define('Temperaments', {
