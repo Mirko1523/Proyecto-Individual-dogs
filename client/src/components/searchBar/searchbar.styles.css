@@ -1,0 +1,43 @@
+/* Estilos para el contenedor de la barra de búsqueda */
+.searchbar-div {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para el botón general */
+.btn {
+    margin-left: 5px;
+    font-family: 'Press Start 2P';
+    padding: 15px; /* Aumentado el padding para hacerlo más grande */
+    margin: 20px;
+    border-radius: 30px;
+    background-color: #ffcc99; /* Fondo amarillo claro estilo perros */
+    color: #000000; /* Texto gris oscuro */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilos para la barra de búsqueda */
+.bar-btn {
+    font-family: 'Press Start 2P';
+    padding: 12px; /* Aumentado el padding para hacerlo más grande */
+    margin-left: 170px; /* Ajustado el margen izquierdo para moverlo más a la izquierda */
+    width: 400px;
+    background-color: #ffd699; /* Fondo durazno claro estilo perros */
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+/* Estilos adicionales para hover */
+.btn:hover {
+    background-color: #ffcc99; /* Fondo amarillo claro al pasar el mouse */
+    color: #b35900; /* Texto marrón claro */
+}
+
+.bar-btn:hover {
+    background-color: #ffcc99; /* Fondo amarillo claro al pasar el mouse */
+}

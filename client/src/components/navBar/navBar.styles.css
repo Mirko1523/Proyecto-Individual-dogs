@@ -1,0 +1,49 @@
+/* Estilos para el contenedor del menú de navegación */
+.nav-div {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+/* Estilos para los botones de navegación */
+.nav-div button {
+    font-family: 'Press Start 2P';
+    padding: 10px;
+    margin: 20px;
+    border-radius: 30px;
+    background-color: #ffd699; /* Fondo amarillo claro estilo perros */
+    color: #4d4d4d; /* Texto gris oscuro */
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más pequeña y oscura en los botones */
+
+    /* Estilos adicionales para hover */
+    &:hover {
+        background-color: #ffcc99; /* Fondo melocotón claro al pasar el mouse */
+        color: #b35900; /* Texto marrón claro */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Aumentada la sombra al pasar el mouse */
+    }
+}
+
+/* Estilos adicionales para el enlace activo */
+.nav-div button.active {
+    background-color: #99ff99; /* Fondo verde claro para el enlace activo */
+    color: #006600; /* Texto verde oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pequeña y oscura para el enlace activo */
+}
+
+/* Estilos para el fondo alrededor de los botones */
+.nav-div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: rgba(255, 218, 185, 0.5); /* Fondo melocotón claro alrededor de los botones con opacidad */
+    border-radius: 10px; /* Borde redondeado */
+}

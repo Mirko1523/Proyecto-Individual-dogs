@@ -1,0 +1,22 @@
+.homepages-container {
+  position: relative;
+  height: 100vh; 
+  overflow-y: scroll; 
+}
+
+.fullscreen-images {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  z-index: -1; 
+  background-attachment: fixed; /
+}
+
+.content {
+  padding: 20px;
+}
+
+
