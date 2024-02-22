@@ -7,7 +7,7 @@ const {Op} = require ('sequelize');
 
 //CONTROLLER para crear un NUEVO PERRO
 const createDogDB = async (name, image, height, weight, life_span) =>{
-    return await Dog.create({name, image, height, weight, life_span})
+    return await Dogs.create({name, image, height, weight, life_span})
 }
 
 //CONTROLLER para buscar un perro mediante su id
@@ -39,12 +39,7 @@ const getDogByName = async (name) => {
 }
 
 //CONTROLLER para buscar todos los perros
-// const getAllDogs = async () => {
-//    const dogsDB = await Dog.findAll();
-//     const infoAPI = await axios.get(`${API}?api_key=${APIKEY}`);
-//     const dogsAPI = cleanInfoApi(infoAPI)
-//     return [...dogsDB, ...dogsAPI];
-// }
+
 const getAllDogs = async () => {
   const [dogsDB, infoAPI] = await Promise.all([
     Dogs.findAll(),

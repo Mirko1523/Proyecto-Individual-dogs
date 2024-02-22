@@ -23,6 +23,7 @@ const getDogsHandler = async (req, res) => {
     try {
         if(name){
             const dogByName = await getDogByName(name);
+            
             res.status(200).json(dogByName);
         } else {
             const response = await getAllDogs();

@@ -1,9 +1,19 @@
-const {Router} = require ('express');
-const getAllDogsTemperaments = require ('../handlers/dogsTemperamentsHandlers');
+// const {Router} = require ('express');
+// const getAllDogsTemperaments = require ('../handlers/dogsTemperamentsHandlers');
+
+// const temperaments = Router();
+
+// //creo una ruta para obtener TODOS los temperamentos de los perritos
+// temperaments.get('/', getAllDogsTemperaments);
+
+// module.exports = temperaments; 
+
+const { Router } = require('express');
+const { getAllDogsTemperaments } = require('../handlers/dogsTemperamentsHandlers');
 
 const temperaments = Router();
 
-//creo una ruta para obtener TODOS los temperamentos de los perritos
+// Cambia la ruta para obtener TODOS los temperamentos de los perritos
 temperaments.get('/', getAllDogsTemperaments);
 
-module.exports = temperaments; 
+module.exports = temperaments;
