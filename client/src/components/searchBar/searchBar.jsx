@@ -83,22 +83,3 @@ function SearchBar({ getByDogsName, allDogs }) {
 
 export default connect(null, { getByDogsName })(SearchBar);
 
-// import React from "react";
-// import './searchbar.styles.css';
-
-// const SearchBar = ({handleInput, handleButton, input}) => {
-//   return (
-//     <div>
-//         <input 
-//                 type='text'
-//                 name='search'
-//                 id='search'
-//                 onChange={handleInput}
-//                 value={input}
-//                 placeholder='buscá tu perrito...'/>
-//             <button onClick={handleButton}>buscar</button>
-//     </div>
-//   )
-// }
-
-// export default SearchBar

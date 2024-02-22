@@ -51,13 +51,17 @@ export function getDogsTemperaments(){
 
 }
 export function postDog(payload) {
-    return async function () {
-      const data = await axios.post("http://localhost:3001/dogs/", payload);
-      console.log(data);
-      dispatch({ type: POST_DOGS, payload: data });
-      return data;
-    };
+  return async function (dispatch) {
+      try {
+          const data = await axios.post("http://localhost:3001/dogs/", payload);
+          console.log(data);
+          dispatch({ type: POST_DOGS, payload: data });
+          return data;
+      } catch (error) {
+          console.error("Error while posting dog:", error);
+      }
   };
+}
 //atributo: setSortOrder(especifica el tipo de acciom)
 //el payload se usa en este caso para transportar el parametro order
 //el order es el nuevo roden de clasificaion que se desea establecer
