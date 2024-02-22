@@ -5,11 +5,11 @@ import { NavLink } from 'react-router-dom'
 function Nav() {
     return ( 
         <div className="nav-div">
-              
             <NavLink to='/'><button>Inicio</button></NavLink>
             <NavLink to='/agregar'><button>Agregar Perro</button></NavLink>
-             
+           
         </div> 
+        
     )
 }
 

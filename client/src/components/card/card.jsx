@@ -4,9 +4,10 @@ import axios from 'axios';
 import './card.styles.css';
 
 function Card({ dog }) {
-  const { name, temperaments, weight, id } = dog;
+  console.log("Card - dog:", dog); // Agrega este log
+  const { name, temperament, weight, id } = dog;
+
   const dogId = id;
-  console.log('temperaments in Card:', temperaments);
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
@@ -29,13 +30,13 @@ function Card({ dog }) {
 
   return (
     <Link to={`/detail/${dogId}`} className="dog-card-link">
-    <div className="dog-card">
-        {imageUrl && <img src={imageUrl} alt={name} className='dog-card-img' />}
+      <div className="dogs-cards">
+        {imageUrl && <img src={imageUrl} alt={name} className='dogs-cards-img' />}
         <h2>Breed: {name ? name : 'No se encontró el nombre'}</h2>
-         <p>Temperaments: {temperaments ? temperaments.join(', ') : 'No se encontraron temperamentos'}</p> 
+        <p>Temperaments: {temperament ? temperament : 'No se encontraron temperamentos'}</p>
         <p>Weight: {weight && weight.metric ? `${weight.metric} kg` : 'No hay peso disponible'}</p>
-    </div>
-      </Link>
+      </div>
+    </Link>
   );
 }
 

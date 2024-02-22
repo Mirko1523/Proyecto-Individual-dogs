@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getDogs, getByDogsName } from '../../redux/actions/index'
- import './searchbar.styles.css'
+import { getByDogsName } from '../../redux/actions/index';
+import './searchbar.styles.css';
 
-//se declara un componente(searchbar) que recibe un parametro(getDogs)
-function SearchBar({ getDogs }) {
-  //utilizo el hook useState(gestiona el estado del componente)
+function SearchBar({ getByDogsName, allDogs }) {
   const [input, setInput] = useState({
-    //almacenara la entrada del usuario
-    buscar: ''
+    buscar: '',
+   
   });
+
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleInputChange = function (e) {
     setInput({
@@ -18,12 +18,26 @@ function SearchBar({ getDogs }) {
   };
 
   const handleOnClick = async () => {
-    await getDogs(input.buscar);
-    console.log("Nuevo estado después de la búsqueda:", input.buscar);
-    setInput({
-      buscar: ''
-    });
+    try {
+      console.log("Input antes de la búsqueda:", input);
+      const result = await getByDogsName(input.buscar);
+
+      // Verifica si result está definido antes de acceder a result.payload
+      if (result && result.payload) {
+        console.log("Nuevo estado después de la búsqueda:", result.payload);
+
+        // Actualiza el estado de los resultados de la búsqueda
+        setSearchResults(result.payload);
+      }
+      console.log("Input después de la búsqueda:", input);
+      setInput({
+        buscar: ''
+      });
+    } catch (error) {
+      console.error('Error during search:', error.message);
+    }
   };
+  console.log("Renderizando component con input y searchResults:", input, searchResults);
 
   return (
     <div className="searchbar-div">
@@ -36,10 +50,55 @@ function SearchBar({ getDogs }) {
         autoComplete="off"
       ></input>
       <button className="btn" onClick={handleOnClick}>
-        Buscar
+              Buscar
       </button>
+
+      {/* Mostrar resultados de la búsqueda */}
+      {input.buscar && searchResults.length > 0 && (
+        <div>
+          Resultados de la búsqueda:
+          <ul>
+            {searchResults.map((dog) => (
+              <li key={dog.id}>{dog.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Mostrar todos los perros si no hay búsqueda activa */}
+      {!input.buscar && searchResults.length === 0 && allDogs && (
+        <div>
+          Todos los perros:
+          <ul>
+            {/* Itera sobre todos los perros */}
+            {allDogs.map((dog) => (
+              <li key={dog.id}>{dog.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
 
-export default connect(null, { getDogs, getByDogsName })(SearchBar);
+export default connect(null, { getByDogsName })(SearchBar);
+
+// import React from "react";
+// import './searchbar.styles.css';
+
+// const SearchBar = ({handleInput, handleButton, input}) => {
+//   return (
+//     <div>
+//         <input 
+//                 type='text'
+//                 name='search'
+//                 id='search'
+//                 onChange={handleInput}
+//                 value={input}
+//                 placeholder='buscá tu perrito...'/>
+//             <button onClick={handleButton}>buscar</button>
+//     </div>
+//   )
+// }
+
+// export default SearchBar

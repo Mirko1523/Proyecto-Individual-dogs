@@ -6,8 +6,10 @@ export const GET_DOGS = "GET_DOGS";
 export const GET_BY_DOGSNAME = "GET_BY_DOGSNAME";
 export const SET_SORT_ORDER = "SET_SORT_ORDER";
 export const GET_DOGS_TEMPERAMENTS = "GET_DOGS_TEMPERAMENTS";
-
-
+//agrego para funcionalidad del filter:
+export const ORDER_BY = "ORDER_BY";
+export const FILTER_BY = "FILTER_BY";
+export const POST_DOGS = "POST_DOGS"
 //esta funcion utiliza axios para hacer una solicitud a la api
 //dispara una accion redux con GET_DOGS y da una respuesta
 export function getDogs () {
@@ -52,6 +54,7 @@ export function postDog(payload) {
     return async function () {
       const data = await axios.post("http://localhost:3001/dogs/", payload);
       console.log(data);
+      dispatch({ type: POST_DOGS, payload: data });
       return data;
     };
   };
@@ -65,3 +68,19 @@ return {
     payload: order,
 }
 }
+
+//* Ordenamiento
+export function orderBy(order) {
+  return function (dispatch) {
+    dispatch({ type: ORDER_BY, payload: order });
+  };
+}
+
+//* Filtrado
+export function filterBy(order) {
+  return function (dispatch) {
+    dispatch({ type: FILTER_BY, payload: order });
+  };
+}
+
+
