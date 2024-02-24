@@ -1,4 +1,4 @@
-const { DataTypes, UUIDV4 } = require('sequelize');
+const { DataTypes, UUIDV } = require('sequelize');
 
 const Dogs = (sequelize) => {
   // defino el modelo
@@ -6,7 +6,6 @@ const Dogs = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING,

@@ -6,9 +6,8 @@ const Temperaments = (sequelize) => {
   sequelize.define('Temperaments', {
     id: {
       type: DataTypes.INTEGER,
-      unique: true,
-      autoincrement: true,
-      primaryKey: true,
+			autoIncrement: true,
+			primaryKey: true
     },
     name: {
       type: DataTypes.STRING,

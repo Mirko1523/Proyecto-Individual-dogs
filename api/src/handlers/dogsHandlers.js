@@ -2,6 +2,7 @@ require('dotenv').config();
 const { createDogDB, getDogById, getDogByName, getAllDogs } = require('../controllers/dogsControllers');
 
 
+
 // Handler para crear un perro
 const createDogDBHandler = async (req, res) => {
     const { name, image, height, weight, life_span } = req.body;

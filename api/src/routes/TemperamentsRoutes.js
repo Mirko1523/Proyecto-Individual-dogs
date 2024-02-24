@@ -9,7 +9,7 @@
 // module.exports = temperaments; 
 
 const { Router } = require('express');
-const { getAllDogsTemperaments } = require('../handlers/dogsTemperamentsHandlers');
+const { getAllDogsTemperaments } = require('../handlers/TemperamentsHandlers');
 
 const temperaments = Router();
 
