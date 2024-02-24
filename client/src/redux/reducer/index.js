@@ -27,6 +27,7 @@ const dogReducer = (state = initialState, action) => {
     case GET_BY_DOGSNAME:
       return {
         ...state,
+        allDogs: action.payload,
         filteredDogs: action.payload,
       };
 
@@ -38,6 +39,7 @@ const dogReducer = (state = initialState, action) => {
       case POST_DOGS:
         return {
           ...state,
+          allDogs: [...state.allDogs, action.payload],
         };
 
     case FILTER_BY:

@@ -15,13 +15,12 @@ export default function Pagination({ cardPerPage, totalCards, paginate, currentP
     }
   }, [currentPage, totalCards, cardPerPage, paginate]);
 
-  
 
 
-  if (pageNumbers.length <= 1) {
+  // if (pageNumbers.length <= 1) {
 
-    return null;
-  }
+  //   return null;
+  // }
 
   return (
     <div className="pagination-container">
@@ -40,4 +39,3 @@ export default function Pagination({ cardPerPage, totalCards, paginate, currentP
     </div>
   );
 }
-

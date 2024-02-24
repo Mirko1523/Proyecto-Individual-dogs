@@ -6,7 +6,7 @@ import Card from '../card/card';
   console.log("Cards - allDogs:", allDogs);
   return (
     <div className='cards-list'>
-      {allDogs?.map((dog) => (
+      {allDogs.map((dog) => (
         <Card key={dog.id} dog={dog} temperament={dog.temperament} />
       ))}
     </div>

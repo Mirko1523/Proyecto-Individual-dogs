@@ -4,7 +4,7 @@ import axios from 'axios';
 import './card.styles.css';
 
 function Card({ dog }) {
-  console.log("Card - dog:", dog); // Agrega este log
+ console.log("Card - dog:", dog); // Agrega este log
   const { name, temperament, weight, id } = dog;
 
   const dogId = id;
@@ -34,7 +34,7 @@ function Card({ dog }) {
         {imageUrl && <img src={imageUrl} alt={name} className='dogs-cards-img' />}
         <h2>Breed: {name ? name : 'No se encontró el nombre'}</h2>
         <p>Temperaments: {temperament ? temperament : 'No se encontraron temperamentos'}</p>
-        <p>Weight: {weight && weight.metric ? `${weight.metric} kg` : 'No hay peso disponible'}</p>
+        <p>Weight: {weight && weight ? `${weight} kg` : 'No hay peso disponible'}</p>
       </div>
     </Link>
   );
