@@ -1,8 +1,5 @@
-const axios = require("axios");
 require("dotenv").config();
-const { API, APIKEY } = process.env;
-const { Op } = require("sequelize");
-const { Temperaments, Dogs , temperamentsDog } = require("../db");
+const { Temperaments, } = require("../db");
 
 const getAllDogsTemperaments = async (req, res) => {
     try {

@@ -16,15 +16,19 @@ const Dogs = (sequelize) => {
       allowNull: true
     },
     height: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true
     },
     weight: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true
     },
     life_span: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+    temperament: {
+      type: DataTypes.STRING, // Ajusta el tipo de datos según la estructura de tu base de datos
       allowNull: true
     },
     created: {
@@ -34,8 +38,6 @@ const Dogs = (sequelize) => {
   },{
     timestamps: false
   });
-
-  
 };
 
 module.exports = Dogs;

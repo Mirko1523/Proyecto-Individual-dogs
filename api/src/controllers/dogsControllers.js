@@ -7,16 +7,19 @@ const {Op} = require ('sequelize');
 const UUID = require("../utils/UUID")
 
 //CONTROLLER para crear un NUEVO PERRO
-const createDogDB = async (name, image, height, weight, life_span) =>{
-    return await Dogs.create({id:UUID(),name, image, height, weight, life_span})
+const createDogDB = async (name, image, height, weight, life_span, temperament) => {
+
+    let formattedTemperament = '';
+
+    if (Array.isArray(temperament) || typeof temperament === 'object') {
+    
+        formattedTemperament = temperament.join(', '); 
+    } else if (typeof temperament === 'string') {
+        formattedTemperament = temperament;
+    }
+
+    return await Dogs.create({ id: UUID(), name, image, height, weight, life_span, temperament: formattedTemperament });
 }
-
-//CONTROLLER para buscar un perro mediante su id
-// const getDogById = async (id, source) => {
-// const dogData = source === 'api' ? (await axios.get (`${API}/${id}?api_key=${APIKEY}`)).data : await Dogs.findByPk(id)
-// return dogData;
-// }
-
 
 //CONTROLLER para buscar un perro mediante su name
 const getDogByName = async (name) => {
@@ -40,6 +43,8 @@ const getAllDogs = async () => {
   const dogsAPI = cleanInfoApi(infoAPI);
   return [...dogsDB, ...dogsAPI];
 }
+
+
 const getDogById = async (id, source) => {
     let dogData;
   
