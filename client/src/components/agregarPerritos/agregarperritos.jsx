@@ -65,6 +65,7 @@ export default function DogCreate() {
     lmin: '',
     lmax: '',
     temperament: [],
+    origin: 'database',
   });
 
   function handleChange(e) {
@@ -110,10 +111,16 @@ export default function DogCreate() {
       input.lmax &&
       input.temperament.length
     ) {
-      input.height = `${input.heightMin} - ${input.heightMax}`
-      input.weight = `${input.weightMin} - ${input.weightMax}`
-      input.life_span = `${input.lmin} - ${input.lmax} years`;
-      dispatch(postDog(input));
+       const dogWithOrigin = {
+        ...input,
+        origin: 'database', // Agregamos la propiedad 'origin' para distinguir el origen
+        height: `${input.heightMin} - ${input.heightMax}`,
+        weight: `${input.weightMin} - ${input.weightMax}`,
+        life_span: `${input.lmin} - ${input.lmax} years`,
+        
+      };
+       dispatch(postDog(dogWithOrigin));
+      // dispatch(postDog(input));
       alert('Dog created successfully');
       setInput({
         name: '',
@@ -125,6 +132,7 @@ export default function DogCreate() {
         lmin: '',
         lmax: '',
         temperament: [],
+        origin: 'database',
       });
     } else {
       alert('Dog not created...');

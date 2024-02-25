@@ -40,30 +40,56 @@ const dogReducer = (state = initialState, action) => {
       };
    
       case GET_DOGS_TEMPERAMENTS:
-        console.log('Temperaments:', action.payload);
+        // console.log('Temperaments:', action.payload);
         return {
           ...state,
           temperaments: action.payload, 
         };
-   case POST_DOGS:
-        return {
-          ...state,
-          allDogs: [...state.allDogs, action.payload],
-        };
-    case FILTER_BY_ORIGIN:
-            const filterByOrigin = state.allDogs.filter(origin =>{
-                if(action.payload === 'Todos') {
-                    return origin;
-                } else if (action.payload === 'DataBase') {
-                    return typeof origin.id !== "number";
-                } else {
-                    return typeof origin.id === "number";
-                }
-            })
-            return {
-                ...state,
-                filteredDogs: filterByOrigin
-            }
+ case POST_DOGS:
+  return {
+    ...state,
+    allDogs: [...state.allDogs, action.payload],
+    filteredDogs: [...state.filteredDogs, action.payload],
+  };
+  
+case FILTER_BY_ORIGIN:
+  const filterByOrigin = state.allDogs.filter(dog => {
+    if (action.payload === 'Todos') {
+      return true; 
+    } else if (action.payload === 'API') {
+    
+      return typeof dog.id === 'number';
+    } else if (action.payload === 'DataBase') {
+  
+      return typeof dog.id !== 'number';
+    }
+  });
+console.log('All Dogs:', state.allDogs);
+  console.log('Filtered Dogs:', filterByOrigin);
+
+  return {
+    ...state,
+    filteredDogs: filterByOrigin
+  };
+
+// case FILTER_BY_ORIGIN:
+//   const filterByOrigin = state.allDogs.filter(dog => {
+//     if (action.payload === 'Todos') {
+//       return true; // Devuelve todos los perros
+//     } else if (action.payload === 'DataBase') {
+//       // Devuelve solo los perros que tienen un id generado por la base de datos
+//       return dog.id && typeof dog.id === "number";
+//     } else {
+//       // Devuelve solo los perros que no tienen un id generado por la base de datos
+//       return !dog.id || typeof dog.id !== "number";
+//     }
+//   });
+
+//   return {
+//     ...state,
+//     filteredDogs: filterByOrigin
+//   };
+
         case FILTER_BY_TEMPERAMENT:
             let temp = [];
             temp = state.allDogs.filter(
@@ -79,48 +105,49 @@ const dogReducer = (state = initialState, action) => {
         case ORDER_BY_NAME: 
             const dogsToOrder = action.payload;
             let dogsToName = dogsToOrder === 'A-Z' 
-            ? [...state.dogs].sort((a, b) => {
+            ? [...state.filteredDogs].sort((a, b) => {
                 const nameA = a.name.toLowerCase();
                 const nameB = b.name.toLowerCase();
                 return nameA.localeCompare(nameB);
             })
             : dogsToOrder === 'Z-A'
-            ?[...state.dogsGetted].sort((a, b) => {
+            ?[...state.filteredDogs].sort((a, b) => {
                 const nameA = a.name.toLowerCase();
                 const nameB = b.name.toLowerCase();
                 return nameB.localeCompare(nameA);
                 })
-                :[...state.dogs]
+                :[...state.filteredDogs]
+                console.log('Filtered Dogs after ORDER_BY_NAME:', dogsToName);
             return {
                 ...state,
-                dogsGetted: dogsToName
+                filteredDogs: dogsToName
             }
-        case ORDER_BY_WEIGHT:
-            const orderWeight = action.payload;
-            switch (orderWeight) {
-                case 'Heavy':
-                    const orderedByWeightHeavy = [...state.dogs].sort((a, b) => {
-                        const weightA = parseInt(a.weight.split(' - ')[1]);
-                        const weightB = parseInt(b.weight.split(' - ')[1]);
-                        return weightB - weightA;
-                    });
-                    return {
-                        ...state,
-                        dogsGetted: orderedByWeightHeavy
-                    }
-                case 'Light':
-                    const orderedByWeightLight = [...state.dogs].sort((a, b) => {
-                        const weightA = parseInt(a.weight.split(' - ')[1]);
-                        const weightB = parseInt(b.weight.split(' - ')[1]);
-                        return weightA - weightB;
-                    });
-                    return {
-                        ...state,
-                        dogsGetted: orderedByWeightLight
-                    }
-                default:
-                    return state;
-            }
+   case ORDER_BY_WEIGHT:
+  const orderWeight = action.payload;
+  switch (orderWeight) {
+    case 'weightDesc':
+      const orderedByWeightDesc = [...state.filteredDogs].sort((a, b) => {
+        const weightA = parseInt(a.weight.split(' - ')[1]);
+        const weightB = parseInt(b.weight.split(' - ')[1]);
+        return weightB - weightA;
+      });
+      return {
+        ...state,
+        filteredDogs: orderedByWeightDesc,
+      };
+    case 'weightAsc':
+      const orderedByWeightAsc = [...state.filteredDogs].sort((a, b) => {
+        const weightA = parseInt(a.weight.split(' - ')[1]);
+        const weightB = parseInt(b.weight.split(' - ')[1]);
+        return weightA - weightB;
+      });
+      return {
+        ...state,
+        filteredDogs: orderedByWeightAsc,
+      };
+    default:
+      return state;
+  }
 
     default:
       return state;
