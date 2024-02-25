@@ -1,3 +1,4 @@
+import './filter.styles.css'
 const Filter = ({ handleTemperamentChange, handleOriginChange, handleSortChange, handleWeightChange, temperaments }) => {
     return (
         <div className="filter-container">
@@ -26,7 +27,7 @@ const Filter = ({ handleTemperamentChange, handleOriginChange, handleSortChange,
                    
 
                     <label className="filter-label">
-                        Ordenar por:
+                        Ordenar por Letra:
                         <select className="filter-select" onChange={handleSortChange}>
                             <option value="">Todos</option>
                             <option value="alphabeticalAsc">A-Z</option>

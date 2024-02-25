@@ -119,6 +119,7 @@ export default function DogCreate() {
         life_span: `${input.lmin} - ${input.lmax} years`,
         
       };
+      console.log('Dog with Origin:', dogWithOrigin);
        dispatch(postDog(dogWithOrigin));
       // dispatch(postDog(input));
       alert('Dog created successfully');

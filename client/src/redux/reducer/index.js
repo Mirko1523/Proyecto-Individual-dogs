@@ -59,36 +59,17 @@ case FILTER_BY_ORIGIN:
     } else if (action.payload === 'API') {
     
       return typeof dog.id === 'number';
-    } else if (action.payload === 'DataBase') {
+    } else if (action.payload === 'BASE_DE_DATOS') {
   
       return typeof dog.id !== 'number';
     }
   });
-console.log('All Dogs:', state.allDogs);
-  console.log('Filtered Dogs:', filterByOrigin);
+
 
   return {
     ...state,
     filteredDogs: filterByOrigin
   };
-
-// case FILTER_BY_ORIGIN:
-//   const filterByOrigin = state.allDogs.filter(dog => {
-//     if (action.payload === 'Todos') {
-//       return true; // Devuelve todos los perros
-//     } else if (action.payload === 'DataBase') {
-//       // Devuelve solo los perros que tienen un id generado por la base de datos
-//       return dog.id && typeof dog.id === "number";
-//     } else {
-//       // Devuelve solo los perros que no tienen un id generado por la base de datos
-//       return !dog.id || typeof dog.id !== "number";
-//     }
-//   });
-
-//   return {
-//     ...state,
-//     filteredDogs: filterByOrigin
-//   };
 
         case FILTER_BY_TEMPERAMENT:
             let temp = [];
@@ -102,26 +83,23 @@ console.log('All Dogs:', state.allDogs);
                 ...state,                
                 filteredDogs: temp,
             }
-        case ORDER_BY_NAME: 
-            const dogsToOrder = action.payload;
-            let dogsToName = dogsToOrder === 'A-Z' 
-            ? [...state.filteredDogs].sort((a, b) => {
-                const nameA = a.name.toLowerCase();
-                const nameB = b.name.toLowerCase();
-                return nameA.localeCompare(nameB);
-            })
-            : dogsToOrder === 'Z-A'
-            ?[...state.filteredDogs].sort((a, b) => {
-                const nameA = a.name.toLowerCase();
-                const nameB = b.name.toLowerCase();
-                return nameB.localeCompare(nameA);
-                })
-                :[...state.filteredDogs]
-                console.log('Filtered Dogs after ORDER_BY_NAME:', dogsToName);
-            return {
-                ...state,
-                filteredDogs: dogsToName
-            }
+    case ORDER_BY_NAME:
+  const orderName = action.payload;
+  let orderedDogsByName;
+
+  if (orderName === 'alphabeticalAsc') {
+    orderedDogsByName = [...state.filteredDogs].sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+  } else if (orderName === 'alphabeticalDesc') {
+    orderedDogsByName = [...state.filteredDogs].sort((a, b) => b.name.toLowerCase().localeCompare(a.name.toLowerCase()));
+  } else {
+    // Si el valor es diferente de 'alphabeticalAsc' y 'alphabeticalDesc', devuelve el estado actual
+    return state;
+  }
+
+  return {
+    ...state,
+    filteredDogs: orderedDogsByName
+  };
    case ORDER_BY_WEIGHT:
   const orderWeight = action.payload;
   switch (orderWeight) {
