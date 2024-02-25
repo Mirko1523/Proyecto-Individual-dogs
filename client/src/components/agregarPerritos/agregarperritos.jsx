@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postDog, getDogsTemperaments } from '../../redux/actions/index';
 import './agregarperritos.styles.css';
+import Predeterminada from '../../Imagenes/353ad9619623b527859c9ce2d07dbcac.jpg'
 
 function validate(input) {
   let errors = {};
@@ -52,6 +53,7 @@ export default function DogCreate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const temperaments = useSelector((state) => state.temperaments);
+
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: '',
@@ -108,14 +110,14 @@ export default function DogCreate() {
       input.lmax &&
       input.temperament.length
     ) {
-      input.heightMax += ' cm';
-      input.weightMax += ' kgs';
+      input.height = `${input.heightMin} - ${input.heightMax}`
+      input.weight = `${input.weightMin} - ${input.weightMax}`
       input.life_span = `${input.lmin} - ${input.lmax} years`;
       dispatch(postDog(input));
       alert('Dog created successfully');
       setInput({
         name: '',
-        image: '',
+        image: Predeterminada,
         heightMin: '',
         heightMax: '',
         weightMin: '',
@@ -243,19 +245,21 @@ export default function DogCreate() {
           </div>
           <label> Temperaments </label>
           <div className="temperaments-container">
-          <select
-            multiple
-            onChange={(e) => handleSelectTemperament(e)}
-            value={input.temperament}
-          >
-            
-            {temperaments.map((temperamento) => (
-              <option key={temperamento.id} value={temperamento.temperament}>
-                {temperamento.temperament}
-              </option>
-            ))}
-          </select>
+         
+       <select
+  multiple
+  onChange={(e) => handleSelectTemperament(e)}
+  value={input.temperament}
+>
+  {temperaments.map((temperamento) => (
+    <option key={temperamento.id} value={temperamento.name}>
+      {temperamento.name}
+    </option>
+  ))}
+</select>
+
           </div>
+          
           <div>
             <button className="create" type="submit">
               CREATE
@@ -278,4 +282,3 @@ export default function DogCreate() {
     </div>
   );
 }
-

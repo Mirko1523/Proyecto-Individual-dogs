@@ -10,17 +10,14 @@ export default function Pagination({ cardPerPage, totalCards, paginate, currentP
   }
 
   useEffect(() => {
+     console.log("currentPage:", currentPage);
+  console.log("totalCards:", totalCards);
+  console.log("cardPerPage:", cardPerPage);
     if (Math.ceil(totalCards / cardPerPage) < currentPage) {
       paginate(1);
     }
   }, [currentPage, totalCards, cardPerPage, paginate]);
 
-
-
-  // if (pageNumbers.length <= 1) {
-
-  //   return null;
-  // }
 
   return (
     <div className="pagination-container">

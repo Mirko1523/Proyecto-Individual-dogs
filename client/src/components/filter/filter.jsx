@@ -1,79 +1,171 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getDogsTemperaments } from '../../redux/actions/index';
+// import './filter.styles.css';
+
+// const Filter = () => {
+//   const dispatch = useDispatch();
+//   const temperaments = useSelector((state) => state.temperaments);
+
+//   const [selectedTemperament, setSelectedTemperament] = useState('');
+//   const [selectedOrigin, setSelectedOrigin] = useState('');
+//   const [sortOption, setSortOption] = useState('');
+//   const [weightOrder, setWeightOrder] = useState('');
+
+//   useEffect(() => {
+//     dispatch(getDogsTemperaments());
+//   }, [dispatch]);
+
+//   const handleTemperamentChange = (event) => {
+//     setSelectedTemperament(event.target.value);
+//     // Realiza acciones adicionales si es necesario
+//   };
+
+//   const handleOriginChange = (event) => {
+//     setSelectedOrigin(event.target.value);
+//     // Realiza acciones adicionales si es necesario
+//   };
+
+//   const handleSortChange = (event) => {
+//     setSortOption(event.target.value);
+//     // Realiza acciones adicionales si es necesario
+//   };
+
+//   const handleWeightChange = (event) => {
+//     setWeightOrder(event.target.value);
+//     // Realiza acciones adicionales si es necesario
+//   };
+
+//   return (
+//     <div className="filter-container">
+//       <label className="filter-label">
+//         Filtrar por Temperamento:
+//         <select className="filter-select" value={selectedTemperament} onChange={handleTemperamentChange}>
+//           <option value="">Todos</option>
+//           {temperaments.map((temperament) => (
+//             <option key={temperament.id} value={temperament.name}>
+//               {temperament.name}
+//             </option>
+//           ))}
+//         </select>
+//       </label>
+
+//       <label className="filter-label">
+//         Filtrar por Origen:
+//         <select className="filter-select" value={selectedOrigin} onChange={handleOriginChange}>
+//           <option value="">Todos</option>
+//           <option value="API">API</option>
+//           <option value="BASE_DE_DATOS">BASE DE DATOS</option>
+//         </select>
+//       </label>
+
+//       <label className="filter-label">
+//         Ordenar por:
+//         <select className="filter-select" value={sortOption} onChange={handleSortChange}>
+//           <option value="">Todos</option>
+//           <option value="alphabeticalAsc">A-Z</option>
+//           <option value="alphabeticalDesc">Z-A</option>
+//         </select>
+//       </label>
+
+//       <label className="filter-label">
+//         Peso:
+//         <select className="filter-select" value={weightOrder} onChange={handleWeightChange}>
+//           <option value="">Todos</option>
+//           <option value="weightAsc">ASC</option>
+//           <option value="weightDesc">DESC</option>
+//         </select>
+//       </label>
+//     </div>
+//   );
+// };
+
+// export default Filter;
+
+ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs, orderBy, filterBy } from '../../redux/actions/index';
+import { getDogsTemperaments } from '../../redux/actions/index';
 import './filter.styles.css';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const allDogs = useSelector(state => state.allDogs);
+  const temperaments = useSelector((state) => state.temperaments);
+
   const [selectedTemperament, setSelectedTemperament] = useState('');
   const [selectedOrigin, setSelectedOrigin] = useState('');
   const [sortOption, setSortOption] = useState('');
+  const [weightOrder, setWeightOrder] = useState('');
 
   useEffect(() => {
-    dispatch(getDogs());
-  }, []);
-
-  const temperaments = [...new Set(
-    allDogs.reduce((acc, dog) => (dog.temperament ? [...acc, ...dog.temperament.split(',').map(item => item.trim())] : acc), [])
-  )];
+    dispatch(getDogsTemperaments());
+  }, [dispatch]);
 
   const handleTemperamentChange = (event) => {
     setSelectedTemperament(event.target.value);
-    dispatch(filterBy(event.target.value));
+    // Realiza acciones adicionales si es necesario
   };
 
   const handleOriginChange = (event) => {
-    const selectedOrigin = event.target.value;
-    setSelectedOrigin(selectedOrigin);
-    dispatch(filterBy(selectedOrigin));
+    setSelectedOrigin(event.target.value);
+    // Realiza acciones adicionales si es necesario
   };
 
   const handleSortChange = (event) => {
-    const selectedSortOption = event.target.value;
-    setSortOption(selectedSortOption);
-    dispatch(orderBy(selectedSortOption));
+    setSortOption(event.target.value);
+    // Realiza acciones adicionales si es necesario
+  };
+
+  const handleWeightChange = (event) => {
+    setWeightOrder(event.target.value);
+    // Realiza acciones adicionales si es necesario
   };
 
   return (
     <div className="filter-container">
-      <label className="filter-label">
-        Filtrar por Temperamento:
-        <select className="filter-select" value={selectedTemperament} onChange={handleTemperamentChange}>
-          <option value="">Todos</option>
-          {temperaments.map((temperament, index) => (
-            <option key={index} value={temperament}>
-              {temperament}
-            </option>
-          ))}
-        </select>
-      </label>
+      {temperaments.length > 0 ? (
+        <>
+          <label className="filter-label">
+            Filtrar por Temperamento:
+            <select className="filter-select" value={selectedTemperament} onChange={handleTemperamentChange}>
+              <option value="">Todos</option>
+              {temperaments.map((temperament) => (
+                <option key={temperament.name || temperament.name} value={temperament.name}>
+                  {temperament.name}
+                </option>
+              ))}
+            </select>
+          </label>
 
-      <label className="filter-label">
-        Filtrar por Origen:
-        <select className="filter-select" value={selectedOrigin} onChange={handleOriginChange}>
-          <option value="">Todos</option>
-          <option value="API">API</option>
-          <option value="BASE_DE_DATOS">BASE DE DATOS</option>
-        </select>
-      </label>
+          <label className="filter-label">
+            Filtrar por Origen:
+            <select className="filter-select" value={selectedOrigin} onChange={handleOriginChange}>
+              <option value="">Todos</option>
+              <option value="API">API</option>
+              <option value="BASE_DE_DATOS">BASE DE DATOS</option>
+            </select>
+          </label>
 
-      <label className="filter-label">
-        Ordenar por:
-        <select className="filter-select" value={sortOption} onChange={handleSortChange}>
-          <option value="">Todos</option>
-          <option value="alphabeticalAsc">A-Z</option>
-          <option value="alphabeticalDesc">Z-A</option>
-        </select>
-      </label>
-      <label className="filter-label">
-        Peso:
-        <select className="filter-select" value={sortOption} onChange={handleSortChange}>
-          <option value="">Todos</option>
-          <option value="weightAsc">ASC</option>
-          <option value="weightDesc">DESC</option>
-        </select>
-      </label>
+          <label className="filter-label">
+            Ordenar por:
+            <select className="filter-select" value={sortOption} onChange={handleSortChange}>
+              <option value="">Todos</option>
+              <option value="alphabeticalAsc">A-Z</option>
+              <option value="alphabeticalDesc">Z-A</option>
+            </select>
+          </label>
+
+          <label className="filter-label">
+            Peso:
+            <select className="filter-select" value={weightOrder} onChange={handleWeightChange}>
+              <option value="">Todos</option>
+              <option value="weightAsc">ASC</option>
+              <option value="weightDesc">DESC</option>
+            </select>
+          </label>
+        </>
+      ) : (
+        <p>Cargando temperamentos...</p>
+      )}
     </div>
   );
 };
