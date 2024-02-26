@@ -31,8 +31,6 @@ function Homepage() {
   }, [dispatch]);
 
   useEffect(() => {
-  // console.log('filteredDogs:', filteredDogs);
-  // console.log('allDogs:', allDogs);
 }, [filteredDogs, allDogs]);
 
   const handleTemperamentChange = (event) => {

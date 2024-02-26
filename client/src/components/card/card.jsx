@@ -4,21 +4,20 @@ import axios from 'axios';
 import './card.styles.css';
 
 function Card({ dog }) {
-
-  const { name, temperament, weight, id } = dog;
+  const { name, temperament, weight, id, image } = dog;
 
   const dogId = id;
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(image || '');
 
   useEffect(() => {
     const fetchDogImage = async () => {
       try {
-          const response = await axios.get(`https://api.thedogapi.com/v1/images/search?breed_id=${dogId}`);
-
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        const image = response.data[0]?.url || '';
-        setImageUrl(image);
+        if (!image) {
+          const response = await axios.get(`http://localhost:3001/dogs/${id}?source=API`);
+          await new Promise(resolve => setTimeout(resolve, 500));
+          const newImage = response.data[0]?.url || '';
+          setImageUrl(newImage);
+        }
       } catch (error) {
         console.error('Error al obtener la imagen del perro:', error.message);
         setImageUrl('');
@@ -26,10 +25,10 @@ function Card({ dog }) {
     };
 
     fetchDogImage();
-  }, [dogId]);
+  }, [dogId, image]);
 
   return (
-    <Link to={`/detail/${dogId}`} className="dog-card-link">
+     <Link to={`/detail/${dogId}`} className="dog-card-link">
       <div className="dogs-cards">
         {imageUrl && <img src={imageUrl} alt={name} className='dogs-cards-img' />}
         <h2>Nombre: {name ? name : 'No se encontró el nombre'}</h2>

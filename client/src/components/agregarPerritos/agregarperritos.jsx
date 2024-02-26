@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postDog, getDogsTemperaments } from '../../redux/actions/index';
 import './agregarperritos.styles.css';
-import Predeterminada from '../../Imagenes/353ad9619623b527859c9ce2d07dbcac.jpg'
+
 
 function validate(input) {
   let errors = {};
@@ -121,7 +121,7 @@ export default function DogCreate() {
       };
       console.log('Dog with Origin:', dogWithOrigin);
        dispatch(postDog(dogWithOrigin));
-      // dispatch(postDog(input));
+
       alert('Dog created successfully');
       setInput({
         name: '',
