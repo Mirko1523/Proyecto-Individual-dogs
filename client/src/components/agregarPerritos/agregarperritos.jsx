@@ -125,7 +125,7 @@ export default function DogCreate() {
       alert('Dog created successfully');
       setInput({
         name: '',
-        image: Predeterminada,
+        image: '',
         heightMin: '',
         heightMax: '',
         weightMin: '',
@@ -162,7 +162,7 @@ export default function DogCreate() {
           <button className="homeBtn customHomeBtn">HOME</button>
         </Link>
         <h1 className="customTitle">Dog Create</h1>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e) => handleSubmit(e)} >
           <div>
             <input
               className="input"
@@ -178,7 +178,7 @@ export default function DogCreate() {
             <input
               className="input"
               placeholder="Image"
-              type="img"
+              type="text"
               value={input.image}
               name="image"
               alt="not found"

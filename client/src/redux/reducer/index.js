@@ -92,7 +92,7 @@ case FILTER_BY_ORIGIN:
   } else if (orderName === 'alphabeticalDesc') {
     orderedDogsByName = [...state.filteredDogs].sort((a, b) => b.name.toLowerCase().localeCompare(a.name.toLowerCase()));
   } else {
-    // Si el valor es diferente de 'alphabeticalAsc' y 'alphabeticalDesc', devuelve el estado actual
+  
     return state;
   }
 

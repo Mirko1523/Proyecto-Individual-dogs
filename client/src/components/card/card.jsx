@@ -35,6 +35,7 @@ function Card({ dog }) {
         <h2>Nombre: {name ? name : 'No se encontró el nombre'}</h2>
         <p>Temperamentos: {temperament ? temperament : 'No se encontraron temperamentos'}</p>
         <p>Peso: {weight && weight ? `${weight} kg` : 'No hay peso disponible'}</p>
+        
       </div>
     </Link>
   );

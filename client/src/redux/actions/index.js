@@ -92,12 +92,12 @@ export function postDog(payload) {
     try {
       console.log('Data being sent to server:', payload);
 
-      const data = await axios.post("http://localhost:3001/dogs/", payload);
+      const response = await axios.post("http://localhost:3001/dogs/", payload);
 
-      console.log('Data received from server:', data);
+      console.log('Data received from server:', response.data);
 
-      dispatch({ type: POST_DOGS, payload: data }); // Asegúrate de pasar la respuesta del servidor como payload
-      return data;
+      dispatch({ type: POST_DOGS, payload: response.data }); // Asegúrate de pasar la respuesta del servidor como payload
+      return response.data;
     } catch (error) {
       console.error("Error while posting dog:", error);
     }
