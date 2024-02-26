@@ -6,22 +6,17 @@ const {cleanInfoApi} = require('../utils/index');
 const {Op} = require ('sequelize');
 const UUID = require("../utils/UUID")
 
-//CONTROLLER para crear un NUEVO PERRO
+
 const createDogDB = async (name, image, height, weight, life_span, temperament) => {
-
     let formattedTemperament = '';
-
     if (Array.isArray(temperament) || typeof temperament === 'object') {
-    
         formattedTemperament = temperament.join(', '); 
     } else if (typeof temperament === 'string') {
         formattedTemperament = temperament;
     }
-
     return await Dogs.create({ id: UUID(), name, image, height, weight, life_span, temperament: formattedTemperament });
 }
 
-//CONTROLLER para buscar un perro mediante su name
 const getDogByName = async (name) => {
   const infoApi = await axios.get(`${API}?api_key=${APIKEY}`);
   const dogsApi = cleanInfoApi(infoApi);
@@ -31,33 +26,36 @@ const getDogByName = async (name) => {
   return [ ...dogsDB,  ...dogFiltered, ];
 }
 
-//CONTROLLER para buscar todos los perros
-
 const getAllDogs = async () => {
   const [dogsDB, infoAPI] = await Promise.all([
     Dogs.findAll(),
     axios.get(`${API}?api_key=${APIKEY}`)
   ]);
   
-  
-  const dogsAPI = cleanInfoApi(infoAPI);
+
+const dogsAPI = cleanInfoApi(infoAPI);
   return [...dogsDB, ...dogsAPI];
 }
 
 
 const getDogById = async (id, source) => {
     let dogData;
-  
+
     if (source === 'api') {
         const allDogs = await getAllDogs();
-        console.log(allDogs);
-        dogData = await allDogs.find(async (dog) => (await dog.id.toString()) === id.toString());
+        // console.log(allDogs);
+
+        for (const dog of allDogs) {
+            if ((await dog.id.toString()) === id.toString()) {
+                dogData = dog;
+                break;
+            }
+        }
     } else {
         dogData = await Dogs.findByPk(id);
     }
-  
-    return dogData;
-  };
 
+    return dogData;
+};
 
 module.exports = {createDogDB, getDogById, getDogByName, getAllDogs  }

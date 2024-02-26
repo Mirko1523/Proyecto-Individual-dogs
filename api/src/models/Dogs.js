@@ -13,8 +13,13 @@ const Dogs = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
+    
     },
+    //  reference_image: { // Cambié el nombre de "image" a "reference_image"
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    // },
     height: {
       type: DataTypes.STRING,
       allowNull: true
@@ -28,7 +33,7 @@ const Dogs = (sequelize) => {
       allowNull: true
     },
     temperament: {
-      type: DataTypes.STRING, // Ajusta el tipo de datos según la estructura de tu base de datos
+      type: DataTypes.STRING, 
       allowNull: true
     },
     created: {
